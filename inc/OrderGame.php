@@ -12,7 +12,10 @@ class OrderGame extends ItemGame {
     public function form() {
         ?>
 
-        <div class="card mb-4">
+        <div class="card pt-2 mt-3 mb-4">
+            <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-1-circle-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M9.283 4.002H7.971L6.072 5.385v1.271l1.834-1.318h.065V12h1.312z"/> </svg>
+            </div>
             <div class="card-body">
                 <div class="card-title fs-5 mb-3 fw-bold">
                     Data Player
@@ -54,10 +57,12 @@ class OrderGame extends ItemGame {
             </div>
         </div>
 
-        <a href="#" class="btn btn-lg btn-success w-100 rounded-pill icon-link justify-content-center icon-link-hover">
-            Proses Pesanan 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/> </svg>
-        </a>
+        <div class="text-end">
+            <a href="#" class="btn px-4 btn-success rounded-pill icon-link justify-content-center icon-link-hover">
+                Proses Pesanan 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/> </svg>
+            </a>
+        </div>
 
         <?php
     } 

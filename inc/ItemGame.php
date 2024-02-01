@@ -37,6 +37,7 @@ class ItemGame {
             'publicly_queryable'  => true,
             'show_ui'             => true,
             'show_in_menu'        => true,
+            'show_in_rest'        => true,
             'query_var'           => true,
             'rewrite'             => array('slug' => $this->post_type),
             'capability_type'     => 'post',

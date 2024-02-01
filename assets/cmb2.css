@@ -1,0 +1,44 @@
+.cmb-type-group .cmb-th, 
+.cmb2-postbox .cmb-th {
+    width: 100%;
+    padding: 0 2% 0 0;
+}
+.cmb-type-group .cmb-th+.cmb-td, 
+.cmb2-postbox .cmb-th+.cmb-td {
+    width: 100%;
+    float: inherit;
+}
+.cmb-repeat-table {
+    background: transparent;
+}
+.cmb-repeat-table .cmb-row.cmb-repeat-row:before {
+    border: none;
+}
+.cmb2-wrap input:not([type="button"]), 
+.cmb2-wrap textarea {
+    width: 100%;
+    border-radius: .25rem;
+    padding: .25rem;
+}
+.cmb2-wrap input.cmb2-upload-file {
+    width: 65%;
+}
+.cmb-repeat-table .cmb-remove-row>.cmb-remove-row-button {
+    border: none;
+    background: #f13f3f;
+    padding: .75rem !important;
+    line-height: 10px;
+    font-size: 15px;
+    color: #fff;
+    min-height: auto;
+}
+.cmb-repeat-table+.cmb-add-row {
+    text-align: right;
+}
+.cmb-repeat-table+.cmb-add-row:before {
+    background: transparent;
+}
+.cmb-type-group .cmb2-wrap>.cmb-field-list>.cmb-row, 
+.cmb2-postbox .cmb2-wrap>.cmb-field-list>.cmb-row {
+    padding: .5rem 0;
+}

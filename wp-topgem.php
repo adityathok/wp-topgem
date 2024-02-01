@@ -60,3 +60,14 @@ function wp_topgem_template($template) {
     return $template;
 }
 add_filter('template_include', 'wp_topgem_template');
+
+//enqueque admin
+function wp_topgem_admin_enqueue() {
+    global $post_type;
+    
+    // Periksa apakah tipe posting yang sedang diedit adalah "itemgame"
+    if ($post_type === 'itemgame') {
+        wp_enqueue_style('wptopgem-cmb2', WPTOPGEM_PLUGIN_URL . 'assets/cmb2.css');
+    }
+}
+add_action('admin_enqueue_scripts', 'wp_topgem_admin_enqueue', 25);
