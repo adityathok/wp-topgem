@@ -64,9 +64,10 @@ add_filter('template_include', 'wp_topgem_template');
 //enqueque admin
 function wp_topgem_admin_enqueue() {
     global $post_type;
+    $page = isset($_GET['page']) ? $_GET['page'] : '';
     
     // Periksa apakah tipe posting yang sedang diedit adalah "itemgame"
-    if ($post_type === 'itemgame') {
+    if ($post_type === 'itemgame' || $page === 'itemgame_option' || $page === 'itemgame_option_pembayaran') {
         wp_enqueue_style('wptopgem-cmb2', WPTOPGEM_PLUGIN_URL . 'assets/cmb2.css');
     }
 }

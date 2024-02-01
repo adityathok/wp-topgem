@@ -1,44 +1,85 @@
-.cmb-type-group .cmb-th, 
-.cmb2-postbox .cmb-th {
-    width: 100%;
-    padding: 0 2% 0 0;
-}
-.cmb-type-group .cmb-th+.cmb-td, 
-.cmb2-postbox .cmb-th+.cmb-td {
-    width: 100%;
-    float: inherit;
-}
 .cmb-repeat-table {
     background: transparent;
+    border: none;
 }
 .cmb-repeat-table .cmb-row.cmb-repeat-row:before {
     border: none;
 }
-.cmb2-wrap input:not([type="button"]), 
-.cmb2-wrap textarea {
+.cmb-repeat-table .cmb-row.cmb-repeat-row {
+    padding: 0.5rem 3rem;
+}
+.cmb-repeat-table input:not([type="button"]), 
+.cmb-repeat-table textarea {
     width: 100%;
-    border-radius: .25rem;
-    padding: .25rem;
 }
-.cmb2-wrap input.cmb2-upload-file {
-    width: 65%;
-}
-.cmb-repeat-table .cmb-remove-row>.cmb-remove-row-button {
-    border: none;
-    background: #f13f3f;
-    padding: .75rem !important;
-    line-height: 10px;
-    font-size: 15px;
-    color: #fff;
-    min-height: auto;
-}
-.cmb-repeat-table+.cmb-add-row {
+.cmb-repeat-table+.cmb-add-row,
+.cmb-td .cmb-repeatable-group .cmb-add-row {
     text-align: right;
 }
 .cmb-repeat-table+.cmb-add-row:before {
     background: transparent;
 }
+.cmb-repeat-table .cmb-row.cmb-repeat-row .cmb-td {
+    display: block;
+}
+.cmb-repeat-table .cmb-remove-row>.cmb-remove-row-button {
+    background-color: #f55151;
+    border: 0;
+    color: #fff;
+    width: 100%;
+    padding: 0.5rem 1rem;
+}
+.cmb-repeatable-grouping > .cmb-field-list {
+    margin: 0 !important;
+}
+.cmb-repeatable-group .cmb-remove-field-row .cmb-shift-rows {
+    float: inherit;
+}
+
+.cmb2-wrap input, 
+.cmb2-wrap textarea {
+    border-radius: 0.15rem;
+    padding: 0.25rem 1rem;
+}
+.cmb2-upload-button.button-secondary,
+.cmb-add-row-button.button-secondary,
+.cmb-add-group-row.button-secondary {
+    border-radius: 0.15rem;
+    padding: 0.25rem 1rem;
+}
+
 .cmb-type-group .cmb2-wrap>.cmb-field-list>.cmb-row, 
 .cmb2-postbox .cmb2-wrap>.cmb-field-list>.cmb-row {
     padding: .5rem 0;
+}
+
+@media screen and (min-width: 768px) {
+    .cmb2-id-data-player .cmb-th {
+        width: 100%;
+    }
+    .cmb2-id-data-player .cmb-repeat-group-field .cmb-td {
+        width: 100% !important;
+        float: inherit !important;
+    }
+    .cmb2-id-data-player .cmb-field-list .cmb-type-text {
+        display: inline-block;
+        width: 50%;
+        vertical-align: top;
+    }
+    .cmb2-id-data-player .cmb-field-list .cmb-type-file {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cmb-type-group .cmb-th, 
+    .cmb2-postbox .cmb-th {
+        width: 100%;
+        padding: 0 2% 0 0;
+    }
+    .cmb-type-group .cmb-th+.cmb-td, 
+    .cmb2-postbox .cmb-th+.cmb-td {
+        width: 100%;
+        float: inherit;
+    }
 }

@@ -88,45 +88,60 @@ class ItemGame {
             'object_types' => array( $this->post_type ),
         ) );  
         
-        $cmb->add_field( array(
-            'name' => 'Data Player',
-            'desc' => 'Data Player / pembeli yang diperlukan untuk pembelian. input dengan format Title|Placeholder,contoh : Player ID|Masukkan ID dengan benar',
-            'type' => 'text',
-            'id'   => 'data_player',
-            'repeatable' => true, 
-            'text' => array(
-                'add_row_text' => 'Tambah Data',
+        $player_field = $cmb->add_field( array(
+            'id'          => 'data_player',
+            'type'        => 'group',
+            'description' => __( 'Data ID Player yang diperlukan untuk pembelian.', 'cmb2' ),
+            'options'     => array(
+                'group_title'       => __( 'Data {#}', 'cmb2' ),
+                'add_button'        => __( 'Tambah Data', 'cmb2' ),
+                'remove_button'     => __( 'Hapus Data', 'cmb2' ),
+                'sortable'          => true,
+                'closed'            => true,
             ),
-            // 'default' => array('Player ID|Masukkan ID dengan benar'),
+        ) );        
+        $cmb->add_group_field( $player_field, array(
+            'name' => 'Title',
+            'id'   => 'title',
+            'type' => 'text',
+        ) );   
+        $cmb->add_group_field( $player_field, array(
+            'name' => 'Placeholder',
+            'id'   => 'placeholder',
+            'type' => 'text',
+        ) ); 
+        $cmb->add_group_field( $player_field, array(
+            'name' => 'Info',
+            'id'   => 'info_img',
+            'type' => 'file',
         ) );
-        $cmb->add_field( array(
-            'name'    => 'Info Data Player',
-            'desc'    => 'upload gambar petunjuk',
-            'default' => '',
-            'id'      => 'info_data_player',
-            'type'    => 'file',
-            'query_args' => array(
-                'type' => array(
-                  'image/gif',
-                  'image/jpeg',
-                  'image/png',
-                ),
+
+        $nominal_field = $cmb->add_field( array(
+            'id'          => 'data_nominal',
+            'type'        => 'group',
+            'description' => __( 'Data Item Nominal pembelian.', 'cmb2' ),
+            'options'     => array(
+                'group_title'       => __( 'Item {#}', 'cmb2' ),
+                'add_button'        => __( 'Tambah Item', 'cmb2' ),
+                'remove_button'     => __( 'Hapus Item', 'cmb2' ),
+                'sortable'          => true,
+                'closed'            => true,
             ),
-        ) ); 
-        $cmb->add_field( array(
-            'name' => 'Nominal',
-            'desc' => 'Data Nominal pembelian. input dengan format Paket|Harga,contoh : 90 Diamonds|Rp 500.000',
+        ) );
+        $cmb->add_group_field( $nominal_field, array(
+            'name' => 'Title',
+            'id'   => 'title',
             'type' => 'text',
-            'id'   => 'data_nominal',
-            'repeatable' => true, 
-            'text' => array(
-                'add_row_text' => 'Tambah Data',
-            ),
-            // 'default' => array('Player ID|Masukkan ID dengan benar'),
-        ) ); 
+        ) );
+        $cmb->add_group_field( $nominal_field, array(
+            'name' => 'Harga',
+            'id'   => 'harga',
+            'type' => 'text',
+        ) );
+        
         $cmb->add_field( array(
             'name'    => 'Icon Nominal',
-            'desc'    => 'upload gambar Icon Nominal',
+            'desc'    => 'Upload gambar Icon Nominal',
             'default' => '',
             'id'      => 'icon_nominal',
             'type'    => 'file',
