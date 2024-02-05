@@ -8,79 +8,90 @@ class OrderGame extends ItemGame {
     public function __construct($post_id) {
         $this->id = $post_id;
     }
+
+    public function save($post){
+        print_r($post);
+    }
     
     public function form() {
+        if(isset($_POST['Nominal']) && $_POST['Nominal']) {
+            $this->save($_POST); 
+        }
         ?>
+        <form action="" method="post">
 
-        <div class="card pt-3 mt-5 mb-5 border-0 shadow">
-            <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
-                <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">1</span>
-            </div>
-            <div class="card-body">
-                <div class="card-title fs-5 mb-3 fw-bold">
-                    Data Player
-                </div> 
-                <?php $this->form_dataplayer(); ?>         
-            </div>
-        </div>
+                <div class="card pt-3 mt-5 mb-5 border-0 shadow">
+                    <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
+                        <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">1</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title fs-5 mb-3 fw-bold">
+                            Data Player
+                        </div> 
+                        <?php $this->form_dataplayer(); ?>         
+                    </div>
+                </div>
 
-        <div class="card pt-3 mt-5 mb-4 border-0 shadow">
-            <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
-                <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">2</span>
-            </div>
-            <div class="card-body">
-                <div class="card-title fs-5 mb-3 fw-bold">
-                    Pilih Nominal
-                </div> 
-                <?php $this->form_datanominal(); ?>         
-            </div>
-        </div>
+                <div class="card pt-3 mt-5 mb-4 border-0 shadow">
+                    <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
+                        <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">2</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title fs-5 mb-3 fw-bold">
+                            Pilih Nominal
+                        </div> 
+                        <?php $this->form_datanominal(); ?>         
+                    </div>
+                </div>
 
-        <div class="card pt-3 mt-5 mb-4 border-0 shadow">
-            <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
-                <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">3</span>
-            </div>
-            <div class="card-body">
-                <div class="card-title fs-5 mb-3 fw-bold">
-                    Metode Pembayaran
-                </div> 
-                <?php $this->form_datanominal(); ?>         
-            </div>
-        </div>
+                <div class="card pt-3 mt-5 mb-4 border-0 shadow">
+                    <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
+                        <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">3</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title fs-5 mb-3 fw-bold">
+                            Metode Pembayaran
+                        </div> 
+                        <?php $this->form_datapembayaran(); ?>         
+                    </div>
+                </div>
 
-        <div class="card pt-3 mt-5 mb-4 border-0 shadow">
-            <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
-                <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">4</span>
-            </div>
-            <div class="card-body">
-                <div class="card-title fs-5 mb-3 fw-bold">
-                    Kode Promo
-                </div> 
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="kodepromo" name="Kode Promo" placeholder="567">
-                    <label for="kodepromo">Masukan Kode Promo</label>
-                </div>       
-            </div>
-        </div>
+                <div class="card pt-3 mt-5 mb-4 border-0 shadow">
+                    <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
+                        <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">4</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title fs-5 mb-3 fw-bold">
+                            Kode Promo
+                        </div> 
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="kodepromo" name="Kode Promo" placeholder="567">
+                            <label for="kodepromo">Masukan Kode Promo</label>
+                        </div>       
+                    </div>
+                </div>
 
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="card-title fs-5 mb-3 fw-bold">
-                    Nomor Whatsapp
-                </div> 
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="nowhatsapp" name="No Whatsapp" placeholder="08000000">
-                    <label for="nowhatsapp">Masukan Nomor Whatsapp</label>
-                </div>       
-            </div>
-        </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="card-title fs-5 mb-3 fw-bold">
+                            Nomor Whatsapp
+                        </div> 
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="nowhatsapp" name="No Whatsapp" placeholder="08000000">
+                            <label for="nowhatsapp">Masukan Nomor Whatsapp</label>
+                        </div>       
+                    </div>
+                </div>
 
-        <div class="text-end">
-            <a href="#" class="btn px-4 btn-success rounded-pill icon-link justify-content-center icon-link-hover shadow">
-                Proses Pesanan 
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/> </svg>
-            </a>
-        </div>
+                <div class="text-end">
+                    <a href="#" class="btn px-4 btn-success rounded-pill icon-link justify-content-center icon-link-hover shadow">
+                        Proses Pesanan 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/> </svg>
+                    </a>
+                </div>
+                
+                <button type="submit">Simpan</button>
+        </form>
 
         <?php
     } 
@@ -159,6 +170,50 @@ class OrderGame extends ItemGame {
             </div>
 
         <?php
+        }
+    }
+
+    public function form_datapembayaran() {
+        $data_pem = get_option( 'itemgame_option_pembayaran' );
+        $data_pem = isset($data_pem['opsi_bayar'])?$data_pem['opsi_bayar']:array();
+        
+        if($data_pem) {
+            ?>
+            <div class="accordion" id="accordionbayar">
+                <?php foreach( $data_pem as $n => $data): ?>
+                    <div class="accordion-item border rounded mb-2 overflow-hidden">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $n;?>" aria-expanded="false" aria-controls="collapse<?php echo $n;?>">
+                                <?php echo $data['nama'];?>
+                            </button>
+                        </h2>
+                        <div id="collapse<?php echo $n;?>" class="accordion-collapse collapse" data-bs-parent="#accordionbayar">
+                            <div class="accordion-body">
+                                <?php echo $data['deskripsi'];?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <?php foreach( $data_pem as $n => $data): ?>
+                <div class="itemdatapembayaran pb-2">
+                    <input type="radio" class="btn-check" name="Pembayaran" id="pembayaran-<?php echo $n;?>" value="<?php echo $data['nama'];?>" autocomplete="off" required>
+                    <label class="btn btn-outline-secondary d-block text-start overflow-hidden p-0" for="pembayaran-<?php echo $n;?>">
+                        <div class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16"> <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/> <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/> </svg> 
+                            <?php echo $data['nama'];?>
+                        </div>
+                        <div class="infopembayaran d-none alert alert-secondary mt-2 mb-0 border-0 rounded-0">
+                            <small>
+                            <?php echo $data['deskripsi'];?>
+                            </small>
+                        </div>
+                    </label>
+                </div>
+            <?php endforeach; ?>
+
+            <?php
         }
     }
 

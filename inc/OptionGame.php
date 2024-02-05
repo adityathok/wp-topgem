@@ -10,13 +10,6 @@ class OptionGame extends ItemGame {
     }
 
     public function register_cmb2() {
-        // $cmb = new_cmb2_box( array(
-        //     'id'          		=> $this->game_option,
-        //     'title'        		=> esc_html__( 'Pengaturan', 'cmb2' ),
-        //     'object_types' 		=> array( 'options-page' ),
-        //     'option_key'		=> $this->game_option,
-        //     'parent_slug'     	=> 'edit.php?post_type='.$this->post_type,
-        // ) );
         $main_options = new_cmb2_box( 
             array(
                 'id'           => $this->game_option,
@@ -70,6 +63,10 @@ class OptionGame extends ItemGame {
             'type' => 'textarea',
         ) );   
 
+    }
+
+    public function get($item){
+        return get_option( $this->game_option.$item );
     }
 
 }
