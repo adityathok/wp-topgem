@@ -47,6 +47,9 @@
     border-radius: 0.15rem;
     padding: 0.25rem 1rem;
 }
+.cmb-form > p.submit {
+    text-align: right;
+}
 
 .cmb-type-group .cmb2-wrap>.cmb-field-list>.cmb-row, 
 .cmb2-postbox .cmb2-wrap>.cmb-field-list>.cmb-row {

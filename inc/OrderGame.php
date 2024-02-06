@@ -20,77 +20,56 @@ class OrderGame extends ItemGame {
         ?>
         <form action="" method="post">
 
-                <div class="card pt-3 mt-5 mb-5 border-0 shadow">
-                    <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
-                        <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">1</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title fs-5 mb-3 fw-bold">
-                            Data Player
-                        </div> 
-                        <?php $this->form_dataplayer(); ?>         
-                    </div>
+            <div class="card my-4 border-dark shadow-sm">
+                <div class="card-header text-bg-dark d-flex align-items-center">
+                    <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">1</span>
+                    <h5 class="m-0">Data Pengguna</h5>
                 </div>
+                <div class="card-body">
+                    <?php $this->form_dataplayer(); ?>         
+                </div>
+            </div>
 
-                <div class="card pt-3 mt-5 mb-4 border-0 shadow">
-                    <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
-                        <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">2</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title fs-5 mb-3 fw-bold">
-                            Pilih Nominal
-                        </div> 
-                        <?php $this->form_datanominal(); ?>         
-                    </div>
+            <div class="card my-4 border-dark shadow-sm">
+                <div class="card-header text-bg-dark d-flex align-items-center">
+                    <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">2</span>
+                    <h5 class="m-0">Pilih Nominal</h5>
                 </div>
+                <div class="card-body">
+                    <?php $this->form_datanominal(); ?>         
+                </div>
+            </div>
 
-                <div class="card pt-3 mt-5 mb-4 border-0 shadow">
-                    <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
-                        <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">3</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title fs-5 mb-3 fw-bold">
-                            Metode Pembayaran
-                        </div> 
-                        <?php $this->form_datapembayaran(); ?>         
-                    </div>
+            <div class="card my-4 border-dark shadow-sm">
+                <div class="card-header text-bg-dark d-flex align-items-center">
+                    <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">3</span>
+                    <h5 class="m-0">Metode Pembayaran</h5>
                 </div>
+                <div class="card-body">
+                    <?php $this->form_datapembayaran(); ?>         
+                </div>
+            </div>
 
-                <div class="card pt-3 mt-5 mb-4 border-0 shadow">
-                    <div class="position-absolute top-0 start-0 translate-middle-y px-3 text-primary">
-                        <span class="text-bg-primary rounded-circle p-2 px-3 fs-5 border border-light border-3">4</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title fs-5 mb-3 fw-bold">
-                            Kode Promo
-                        </div> 
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="kodepromo" name="Kode Promo" placeholder="567">
-                            <label for="kodepromo">Masukan Kode Promo</label>
-                        </div>       
-                    </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="card-title fs-5 mb-3 fw-bold">
+                        Nomor Whatsapp
+                    </div> 
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="nowhatsapp" name="No Whatsapp" placeholder="08000000">
+                        <label for="nowhatsapp">Masukan Nomor Whatsapp</label>
+                    </div>       
                 </div>
+            </div>
 
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="card-title fs-5 mb-3 fw-bold">
-                            Nomor Whatsapp
-                        </div> 
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="nowhatsapp" name="No Whatsapp" placeholder="08000000">
-                            <label for="nowhatsapp">Masukan Nomor Whatsapp</label>
-                        </div>       
-                    </div>
-                </div>
-
-                <div class="text-end">
-                    <a href="#" class="btn px-4 btn-success rounded-pill icon-link justify-content-center icon-link-hover shadow">
-                        Proses Pesanan 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/> </svg>
-                    </a>
-                </div>
-                
-                <button type="submit">Simpan</button>
+            <div class="text-end">
+                <a href="#" class="btn px-4 btn-success rounded-pill icon-link justify-content-center icon-link-hover shadow">
+                    Proses Pesanan 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/> </svg>
+                </a>
+            </div>
+            
+            <button type="submit">Simpan</button>
         </form>
 
         <?php
@@ -107,7 +86,7 @@ class OrderGame extends ItemGame {
                     <?php $price = $data['harga'];?>
                     <div class="col-md-6 pb-3">                    
                         <input type="radio" class="btn-check" name="Nominal" id="nominal-<?php echo $n;?>" value="<?php echo $title;?>" autocomplete="off" required>
-                        <label class="btn btn-outline-primary d-block text-start" for="nominal-<?php echo $n;?>">
+                        <label class="btn btn-outline-secondary d-block text-start" for="nominal-<?php echo $n;?>">
                             <div class="row">
                                 <div class="col">
                                     <div class="fw-bold" style="font-size: 15px;"><?php echo $title;?></div>
@@ -135,9 +114,9 @@ class OrderGame extends ItemGame {
         ?>
             <div class="row">
                 <?php foreach( $data_player as $n => $data): ?>
-                        <?php $title    = $data['title'];?>
-                        <?php $plchd    = $data['placeholder'];?>
-                        <?php $info_img = $data['info_img'];?>
+                        <?php $title    = isset($data['title'])?$data['title']:'';?>
+                        <?php $plchd    = isset($data['placeholder'])?$data['placeholder']:'';?>
+                        <?php $info_img = isset($data['info_img'])?$data['info_img']:'';?>
                         <div class="col-md-12 pb-3">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="dp-<?php echo $n;?>" name="<?php echo $title;?>" placeholder="<?php echo $plchd;?>" required>
