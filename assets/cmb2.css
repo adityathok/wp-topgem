@@ -56,24 +56,6 @@
     padding: .5rem 0;
 }
 
-@media screen and (min-width: 768px) {
-    .cmb2-id-data-player .cmb-th {
-        width: 100%;
-    }
-    .cmb2-id-data-player .cmb-repeat-group-field .cmb-td {
-        width: 100% !important;
-        float: inherit !important;
-    }
-    .cmb2-id-data-player .cmb-field-list .cmb-type-text {
-        display: inline-block;
-        width: 50%;
-        vertical-align: top;
-    }
-    .cmb2-id-data-player .cmb-field-list .cmb-type-file {
-        padding: 0;
-    }
-}
-
 @media screen and (max-width: 768px) {
     .cmb-type-group .cmb-th, 
     .cmb2-postbox .cmb-th {

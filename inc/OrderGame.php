@@ -9,16 +9,27 @@ class OrderGame extends ItemGame {
         $this->id = $post_id;
     }
 
-    public function save($post){
-        print_r($post);
+    public function initialize() {
+    //     add_action('wp_ajax_nopriv_formordergame', array($this, 'ajax'));
+    //     add_action('wp_ajax_formordergame', array($this, 'ajax'));
     }
+
+    // public function ajax(){
+    //     // Check for nonce security      
+    //     if ( ! wp_verify_nonce( $_POST['nonce'], 'ajax-nonce' ) ) {
+    //         return false;
+    //     }
+        
+    //     // Mengurai data yang di-serialize
+    //     parse_str($_POST['form'], $data);
+
+    //     print_r($data);
+
+    // }
     
     public function form() {
-        if(isset($_POST['Nominal']) && $_POST['Nominal']) {
-            $this->save($_POST); 
-        }
         ?>
-        <form action="" method="post">
+        <form id="formOrderGame" action="" method="post">
 
             <div class="card my-4 border-dark shadow-sm">
                 <div class="card-header text-bg-dark d-flex align-items-center">
@@ -50,26 +61,29 @@ class OrderGame extends ItemGame {
                 </div>
             </div>
 
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="card-title fs-5 mb-3 fw-bold">
-                        Nomor Whatsapp
-                    </div> 
+            <div class="card my-4 border-dark shadow-sm">
+                <div class="card-header text-bg-dark d-flex align-items-center">
+                    <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">4</span>
+                    <h5 class="m-0">Kontak</h5>
+                </div>
+                <div class="card-body">                    
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" name="Email" placeholder="email@email.com">
+                        <label for="email">Email</label>
+                    </div>                        
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="nowhatsapp" name="No Whatsapp" placeholder="08000000">
-                        <label for="nowhatsapp">Masukan Nomor Whatsapp</label>
-                    </div>       
+                        <input type="text" class="form-control" id="nowhatsapp" name="No_Whatsapp" placeholder="08000000">
+                        <label for="nowhatsapp">Nomor Whatsapp</label>
+                    </div>     
                 </div>
             </div>
-
+            
             <div class="text-end">
-                <a href="#" class="btn px-4 btn-success rounded-pill icon-link justify-content-center icon-link-hover shadow">
+                <button type="submit" class="btn btn-lg px-4 btn-success rounded-pill icon-link justify-content-center icon-link-hover shadow">
                     Proses Pesanan 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/> </svg>
-                </a>
+                </button>
             </div>
-            
-            <button type="submit">Simpan</button>
         </form>
 
         <?php
@@ -87,18 +101,16 @@ class OrderGame extends ItemGame {
                     <div class="col-md-6 pb-3">                    
                         <input type="radio" class="btn-check" name="Nominal" id="nominal-<?php echo $n;?>" value="<?php echo $title;?>" autocomplete="off" required>
                         <label class="btn btn-outline-secondary d-block text-start" for="nominal-<?php echo $n;?>">
-                            <div class="row">
-                                <div class="col">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
                                     <div class="fw-bold" style="font-size: 15px;"><?php echo $title;?></div>
                                     <small class="fst-italic"><?php echo $price;?></small>
                                 </div>
-                                <div class="col-lg-3 col-2 m-auto text-end">
-                                    <?php if($icon_nominal): ?>
-                                        <img src="<?php echo $icon_nominal;?>" class="img-fluid w-100" loading="lazy"/>
-                                    <?php else: ?>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gem" viewBox="0 0 16 16"> <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z"/> </svg>
-                                    <?php endif; ?>
-                                </div>
+                                <?php if($icon_nominal): ?>
+                                    <div>
+                                        <img src="<?php echo $icon_nominal;?>" class="img-fluid" loading="lazy" width="60"/>
+                                    </div>                                    
+                                <?php endif; ?>
                             </div>
                         </label>                    
                     </div>
@@ -109,44 +121,39 @@ class OrderGame extends ItemGame {
     }
 
     public function form_dataplayer() {
-        $data_player = get_post_meta($this->id,'data_player',true);
+        $data_player        = get_post_meta($this->id,'data_pengguna',true);
+        $info_data_player   = get_post_meta($this->id,'info_data_pengguna',true);
         if($data_player) {
         ?>
             <div class="row">
                 <?php foreach( $data_player as $n => $data): ?>
-                        <?php $title    = isset($data['title'])?$data['title']:'';?>
-                        <?php $plchd    = isset($data['placeholder'])?$data['placeholder']:'';?>
-                        <?php $info_img = isset($data['info_img'])?$data['info_img']:'';?>
-                        <div class="col-md-12 pb-3">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="dp-<?php echo $n;?>" name="<?php echo $title;?>" placeholder="<?php echo $plchd;?>" required>
-                                <label for="dp-<?php echo $n;?>"><?php echo $title;?></label>
-                                <?php if($info_img): ?>
-                                    <button type="button" class="position-absolute top-0 end-0 bottom-0 btn btn-sm btn-outline-secondary border-0" data-bs-toggle="modal" data-bs-target="#infoPlayerModal<?php echo $n;?>">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/> <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/> </svg> 
-                                    </button>
-                                <?php endif; ?>
-                            </div>
-                            <?php if($plchd): ?>   
-                                <div id="dp-<?php echo $n;?>" class="form-text"><?php echo $plchd;?></div>
-                            <?php endif; ?>
-
-                            <?php if($info_img): ?>
-                                <!-- Modal -->
-                                <div class="modal fade" id="infoPlayerModal<?php echo $n;?>" tabindex="-1" aria-labelledby="infoPlayerModal<?php echo $n;?>Label" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-body">                                
-                                                <img src="<?php echo $info_img;?>" class="img-fluid w-100" loading="lazy"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-
+                    <?php $name = $data?str_replace(" ","_",$data):$data; ?>
+                    <div class="col-md-6 pb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="dp-<?php echo $n;?>" name="<?php echo $name;?>" placeholder="<?php echo $data;?>" required>
+                            <label for="dp-<?php echo $n;?>"><?php echo $data;?></label>
                         </div>
+                    </div>
                 <?php endforeach; ?>
             </div>
+            <?php if($info_data_player): ?>
+                <!-- Button trigger modal -->
+                <div class="text-end">
+                    <button type="button" class="btn btn-primary btn-sm px-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#infoModal">
+                        Info Pengguna
+                    </button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="<?php echo $info_data_player;?>" alt="" class="w-100" loading="lazy"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
 
         <?php
         }
@@ -161,11 +168,14 @@ class OrderGame extends ItemGame {
             <div class="accordion" id="accordionbayar">
                 <?php foreach( $data_pem as $n => $data): ?>
                     <div class="accordion-item border rounded mb-2 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $n;?>" aria-expanded="false" aria-controls="collapse<?php echo $n;?>">
+                        <h2 class="accordion-header">                          
+                            <input type="radio" class="w-100 p-3 btn-check" name="Pembayaran" id="pembayaran-<?php echo $n;?>" value="<?php echo $data['nama'].'|'.$data['deskripsi'];?>" autocomplete="off" required>                        
+                            <label class="accordion-button btn collapsed text-start overflow-hidden" for="pembayaran-<?php echo $n;?>"  data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $n;?>">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-fill me-2" viewBox="0 0 16 16"> <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1"/> </svg>
                                 <?php echo $data['nama'];?>
-                            </button>
+                            </label>
                         </h2>
+                        
                         <div id="collapse<?php echo $n;?>" class="accordion-collapse collapse" data-bs-parent="#accordionbayar">
                             <div class="accordion-body">
                                 <?php echo $data['deskripsi'];?>
@@ -174,26 +184,12 @@ class OrderGame extends ItemGame {
                     </div>
                 <?php endforeach; ?>
             </div>
-
-            <?php foreach( $data_pem as $n => $data): ?>
-                <div class="itemdatapembayaran pb-2">
-                    <input type="radio" class="btn-check" name="Pembayaran" id="pembayaran-<?php echo $n;?>" value="<?php echo $data['nama'];?>" autocomplete="off" required>
-                    <label class="btn btn-outline-secondary d-block text-start overflow-hidden p-0" for="pembayaran-<?php echo $n;?>">
-                        <div class="p-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16"> <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/> <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/> </svg> 
-                            <?php echo $data['nama'];?>
-                        </div>
-                        <div class="infopembayaran d-none alert alert-secondary mt-2 mb-0 border-0 rounded-0">
-                            <small>
-                            <?php echo $data['deskripsi'];?>
-                            </small>
-                        </div>
-                    </label>
-                </div>
-            <?php endforeach; ?>
-
             <?php
         }
     }
 
 }
+
+// Inisialisasi class OrderGame
+// $orderGame = new OrderGame();
+// $OrderGame->initialize();

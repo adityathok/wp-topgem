@@ -88,33 +88,31 @@ class ItemGame {
             'object_types' => array( $this->post_type ),
         ) );  
         
-        $player_field = $cmb->add_field( array(
-            'id'          => 'data_player',
-            'type'        => 'group',
-            'description' => __( 'Data ID Player yang diperlukan untuk pembelian.', 'cmb2' ),
-            'options'     => array(
-                'group_title'       => __( 'Data {#}', 'cmb2' ),
-                'add_button'        => __( 'Tambah Data', 'cmb2' ),
-                'remove_button'     => __( 'Hapus Data', 'cmb2' ),
-                'sortable'          => true,
-                'closed'            => true,
+        $cmb->add_field( array(
+            'name'    => 'Data Pengguna',
+            'desc'    => 'Data-data player yang diperlukan untuk pembelian',
+            'default' => '',
+            'id'      => 'data_pengguna',
+            'type'    => 'text',
+            'repeatable'    => true,
+            'text'          => array(
+                'add_row_text' => 'Tambah data',
             ),
-        ) );        
-        $cmb->add_group_field( $player_field, array(
-            'name' => 'Title',
-            'id'   => 'title',
-            'type' => 'text',
-        ) );   
-        $cmb->add_group_field( $player_field, array(
-            'name' => 'Placeholder',
-            'id'   => 'placeholder',
-            'type' => 'text',
         ) ); 
-        $cmb->add_group_field( $player_field, array(
-            'name' => 'Info',
-            'id'   => 'info_img',
-            'type' => 'file',
-        ) );
+        $cmb->add_field( array(
+            'name'    => 'Info Data Pengguna',
+            'desc'    => 'Upload gambar untuk Info Data Pengguna',
+            'default' => '',
+            'id'      => 'info_data_pengguna',
+            'type'    => 'file',
+            'query_args' => array(
+                'type' => array(
+                  'image/gif',
+                  'image/jpeg',
+                  'image/png',
+                ),
+            ),
+        ) ); 
 
         $nominal_field = $cmb->add_field( array(
             'id'          => 'data_nominal',
