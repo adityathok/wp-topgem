@@ -5,87 +5,88 @@ class OrderGame extends ItemGame {
 
     public $id;
 
-    public function __construct($post_id) {
+    public function __construct($post_id=null) {
         $this->id = $post_id;
     }
 
-    public function initialize() {
-    //     add_action('wp_ajax_nopriv_formordergame', array($this, 'ajax'));
-    //     add_action('wp_ajax_formordergame', array($this, 'ajax'));
+    public function save($data=null){
+                
+
     }
-
-    // public function ajax(){
-    //     // Check for nonce security      
-    //     if ( ! wp_verify_nonce( $_POST['nonce'], 'ajax-nonce' ) ) {
-    //         return false;
-    //     }
-        
-    //     // Mengurai data yang di-serialize
-    //     parse_str($_POST['form'], $data);
-
-    //     print_r($data);
-
-    // }
     
     public function form() {
         ?>
-        <form id="formOrderGame" action="" method="post">
+        <div class="form-order-game">
+            <form id="formOrderGame" action="" method="post">
 
-            <div class="card my-4 border-dark shadow-sm">
-                <div class="card-header text-bg-dark d-flex align-items-center">
-                    <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">1</span>
-                    <h5 class="m-0">Data Pengguna</h5>
+                <div class="card my-4 border-dark shadow-sm">
+                    <div class="card-header text-bg-dark d-flex align-items-center">
+                        <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">1</span>
+                        <h5 class="m-0">Data Pengguna</h5>
+                    </div>
+                    <div class="card-body">
+                        <?php $this->form_dataplayer(); ?>         
+                    </div>
                 </div>
-                <div class="card-body">
-                    <?php $this->form_dataplayer(); ?>         
+
+                <div class="card my-4 border-dark shadow-sm">
+                    <div class="card-header text-bg-dark d-flex align-items-center">
+                        <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">2</span>
+                        <h5 class="m-0">Pilih Nominal</h5>
+                    </div>
+                    <div class="card-body">
+                        <?php $this->form_datanominal(); ?>         
+                    </div>
+                </div>
+
+                <div class="card my-4 border-dark shadow-sm">
+                    <div class="card-header text-bg-dark d-flex align-items-center">
+                        <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">3</span>
+                        <h5 class="m-0">Metode Pembayaran</h5>
+                    </div>
+                    <div class="card-body">
+                        <?php $this->form_datapembayaran(); ?>         
+                    </div>
+                </div>
+
+                <div class="card my-4 border-dark shadow-sm">
+                    <div class="card-header text-bg-dark d-flex align-items-center">
+                        <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">4</span>
+                        <h5 class="m-0">Kontak</h5>
+                    </div>
+                    <div class="card-body">                    
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" name="Email" placeholder="email@email.com">
+                            <label for="email">Email</label>
+                        </div>                        
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="nowhatsapp" name="No_Whatsapp" placeholder="08000000">
+                            <label for="nowhatsapp">Nomor Whatsapp</label>
+                        </div>     
+                    </div>
+                </div>
+                
+                <div class="text-end">
+                    <button type="submit" data-bs-toggle="modal" data-bs-target="#responOrderModal" class="btn btn-lg px-4 btn-success rounded-pill icon-link justify-content-center icon-link-hover shadow">
+                        Proses Pesanan 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/> </svg>
+                    </button>
+                </div>
+
+            </form>
+                
+            <!-- Modal -->
+            <div class="modal fade" id="responOrderModal" tabindex="-1" aria-labelledby="responOrderModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            ...
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="card my-4 border-dark shadow-sm">
-                <div class="card-header text-bg-dark d-flex align-items-center">
-                    <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">2</span>
-                    <h5 class="m-0">Pilih Nominal</h5>
-                </div>
-                <div class="card-body">
-                    <?php $this->form_datanominal(); ?>         
-                </div>
-            </div>
-
-            <div class="card my-4 border-dark shadow-sm">
-                <div class="card-header text-bg-dark d-flex align-items-center">
-                    <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">3</span>
-                    <h5 class="m-0">Metode Pembayaran</h5>
-                </div>
-                <div class="card-body">
-                    <?php $this->form_datapembayaran(); ?>         
-                </div>
-            </div>
-
-            <div class="card my-4 border-dark shadow-sm">
-                <div class="card-header text-bg-dark d-flex align-items-center">
-                    <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">4</span>
-                    <h5 class="m-0">Kontak</h5>
-                </div>
-                <div class="card-body">                    
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="email" name="Email" placeholder="email@email.com">
-                        <label for="email">Email</label>
-                    </div>                        
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="nowhatsapp" name="No_Whatsapp" placeholder="08000000">
-                        <label for="nowhatsapp">Nomor Whatsapp</label>
-                    </div>     
-                </div>
-            </div>
-            
-            <div class="text-end">
-                <button type="submit" class="btn btn-lg px-4 btn-success rounded-pill icon-link justify-content-center icon-link-hover shadow">
-                    Proses Pesanan 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/> </svg>
-                </button>
-            </div>
-        </form>
-
+        </div>
         <?php
     } 
     
@@ -189,7 +190,3 @@ class OrderGame extends ItemGame {
     }
 
 }
-
-// Inisialisasi class OrderGame
-// $orderGame = new OrderGame();
-// $OrderGame->initialize();

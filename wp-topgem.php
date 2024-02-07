@@ -82,3 +82,22 @@ function wp_topgem_enqueue_scripts() {
     ));
 }
 add_action( 'wp_enqueue_scripts', 'wp_topgem_enqueue_scripts' );
+
+//register AJAX
+add_action('wp_ajax_nopriv_formordergame', 'ajax_formordergame');
+add_action('wp_ajax_formordergame', 'ajax_formordergame');
+function ajax_formordergame(){   
+
+    // Check for nonce security      
+    if ( ! wp_verify_nonce( $_POST['nonce'], 'ajax-nonce' ) ) {
+        return false;
+    }
+    
+    // Mengurai data yang di-serialize
+    parse_str($_POST['form'], $data);
+
+    $OrderGame = new WPTopGem\OrderGame();
+    $OrderGame->save($data);
+    
+    wp_die();
+}
