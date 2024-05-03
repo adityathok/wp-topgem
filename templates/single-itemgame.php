@@ -10,6 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 get_header();
+do_action('karyawp_container_before');
 ?>
 
     <main class="site-main" id="main">
@@ -26,4 +27,5 @@ get_header();
     </main><!-- #main -->
 
 <?php
+do_action('karyawp_container_after');
 get_footer();

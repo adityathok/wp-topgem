@@ -43,7 +43,7 @@ class ItemGame {
             'capability_type'     => 'post',
             'has_archive'         => true,
             'hierarchical'        => false,
-            'menu_position'       => null,
+            'menu_position'       => 30,
             'supports'            => array('title', 'editor', 'thumbnail'),
             'menu_icon'           => 'dashicons-games'
         );

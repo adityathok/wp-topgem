@@ -13,12 +13,13 @@ class OptionGame extends ItemGame {
         $main_options = new_cmb2_box( 
             array(
                 'id'           => $this->game_option,
-                'title'        => 'Pengaturan',
+                'title'        => 'Pengaturan Game',
                 'object_types' => array( 'options-page' ),
                 'option_key'   => $this->game_option,
                 'tab_group'    => $this->game_option,
                 'tab_title'    => 'Umum',
-                'parent_slug'  => 'edit.php?post_type='.$this->post_type,
+                'position'     => 31,
+                'icon_url'     => 'dashicons-games',
             ) 
         );
         $main_options->add_field( array(
