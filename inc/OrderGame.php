@@ -19,10 +19,10 @@ class OrderGame extends ItemGame {
         <div class="form-order-game">
             <form id="formOrderGame" action="" method="post">
 
-                <div class="card my-4 border-dark shadow-sm">
-                    <div class="card-header text-bg-dark d-flex align-items-center">
-                        <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">1</span>
-                        <h5 class="m-0">Data Pengguna</h5>
+                <div class="card overflow-hidden mb-3 mb-md-4 shadow">
+                    <div class="card-header p-0">
+                        <span class="btn btn-primary rounded-0">1</span>
+                        <span class="p-2 fw-bold">Data Pengguna</span>
                     </div>
                     <div class="card-body">
                         <?php $this->form_dataplayer(); ?>         
@@ -122,34 +122,46 @@ class OrderGame extends ItemGame {
     }
 
     public function form_dataplayer() {
-        $data_player        = get_post_meta($this->id,'data_pengguna',true);
-        $info_data_player   = get_post_meta($this->id,'info_data_pengguna',true);
+        $data_player        = get_post_meta($this->id,'data_player',true);
+        $info_dataplayer    = get_post_meta($this->id,'info_data_player',true);
+        $imginfo_dataplayer = get_post_meta($this->id,'img_info_data_player',true);
         if($data_player) {
         ?>
             <div class="row">
                 <?php foreach( $data_player as $n => $data): ?>
-                    <?php $name = $data?str_replace(" ","_",$data):$data; ?>
+                    <?php                     
+                        $title = strpos($data,'|') !== false?explode("|",$data)[0]:$data;
+                        $plchd = strpos($data,'|') !== false?explode("|",$data)[1]:$data;
+                    ?>
                     <div class="col-md-6 pb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="dp-<?php echo $n;?>" name="<?php echo $name;?>" placeholder="<?php echo $data;?>" required>
-                            <label for="dp-<?php echo $n;?>"><?php echo $data;?></label>
+                            <input type="text" class="form-control" id="dp-<?php echo $n;?>" name="dataplayer[<?php echo $title;?>]" placeholder="<?php echo $plchd;?>" required>
+                            <label for="dp-<?php echo $n;?>"><?php echo $plchd;?></label>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
-            <?php if($info_data_player): ?>
+            <?php if($info_dataplayer): ?>
+                <div class="fst-italic small">
+                    <?php echo $info_dataplayer;?>
+                </div>
+            <?php endif; ?>
+
+            <?php if($imginfo_dataplayer): ?>
                 <!-- Button trigger modal -->
                 <div class="text-end">
-                    <button type="button" class="btn btn-primary btn-sm px-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#infoModal">
-                        Info Pengguna
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#imginfoModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247m2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/>
+                        </svg>
                     </button>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+                <div class="modal fade" id="imginfoModal" tabindex="-1" aria-labelledby="imginfoModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <img src="<?php echo $info_data_player;?>" alt="" class="w-100" loading="lazy"/>
+                                <img src="<?php echo $imginfo_dataplayer;?>" alt="" class="w-100" loading="lazy"/>
                             </div>
                         </div>
                     </div>

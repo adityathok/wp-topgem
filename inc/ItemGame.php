@@ -89,10 +89,10 @@ class ItemGame {
         ) );  
         
         $cmb->add_field( array(
-            'name'    => 'Data Pengguna',
-            'desc'    => 'Data-data player yang diperlukan untuk pembelian',
+            'name'    => 'Data Player',
+            'desc'    => 'Data-data pembeli / player yang diperlukan untuk pembelian, format : title|placeholder',
             'default' => '',
-            'id'      => 'data_pengguna',
+            'id'      => 'data_player',
             'type'    => 'text',
             'repeatable'    => true,
             'text'          => array(
@@ -100,16 +100,24 @@ class ItemGame {
             ),
         ) ); 
         $cmb->add_field( array(
-            'name'    => 'Info Data Pengguna',
+            'name'    => 'Info Data Player',
+            'desc'    => '',
+            'default' => '',
+            'id'      => 'info_data_player',
+            'type'    => 'textarea',
+        ) );
+        $cmb->add_field( array(
+            'name'    => 'Gambar Info Data Player',
             'desc'    => 'Upload gambar untuk Info Data Pengguna',
             'default' => '',
-            'id'      => 'info_data_pengguna',
+            'id'      => 'img_info_data_player',
             'type'    => 'file',
             'query_args' => array(
                 'type' => array(
                   'image/gif',
                   'image/jpeg',
                   'image/png',
+                  'image/webp',
                 ),
             ),
         ) ); 
