@@ -19,50 +19,71 @@ class OrderGame extends ItemGame {
         <div class="form-order-game">
             <form id="formOrderGame" action="" method="post">
 
-                <div class="card overflow-hidden mb-3 mb-md-4 shadow">
-                    <div class="card-header p-0">
-                        <span class="btn btn-primary rounded-0">1</span>
-                        <span class="p-2 fw-bold">Data Pengguna</span>
+                <div class="card mb-4 rounded-4 shadow-sm">
+                    <div class="card-header py-3 bg-transparent border-0 d-flex align-items-center">
+                        <span class="text-bg-primary rounded-circle px-3 py-2 me-3 fs-6 fw-bold">1</span>
+                        <h3 class="fs-5 m-0">Data Akun</h3>
                     </div>
                     <div class="card-body">
                         <?php $this->form_dataplayer(); ?>         
                     </div>
                 </div>
 
-                <div class="card my-4 border-dark shadow-sm">
-                    <div class="card-header text-bg-dark d-flex align-items-center">
-                        <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">2</span>
-                        <h5 class="m-0">Pilih Nominal</h5>
+                <div class="card mb-4 rounded-4 shadow-sm">
+                    <div class="card-header py-3 bg-transparent border-0 d-flex align-items-center">
+                        <span class="text-bg-primary rounded-circle px-3 py-2 me-3 fs-6 fw-bold">2</span>
+                        <h3 class="fs-5 m-0">Pilih Nominal</h3>
                     </div>
                     <div class="card-body">
                         <?php $this->form_datanominal(); ?>         
                     </div>
                 </div>
 
-                <div class="card my-4 border-dark shadow-sm">
-                    <div class="card-header text-bg-dark d-flex align-items-center">
-                        <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">3</span>
-                        <h5 class="m-0">Metode Pembayaran</h5>
+                <div class="card mb-4 rounded-4 shadow-sm">
+                    <div class="card-header py-3 bg-transparent border-0 d-flex align-items-center">
+                        <span class="text-bg-primary rounded-circle px-3 py-2 me-3 fs-6 fw-bold">3</span>
+                        <h3 class="fs-5 m-0">Kode Promo</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-2">
+                            <div class="col-8 col-md-9 col-xl-10">
+                                <div class="input-kodepromo form-control p-0 position-relative" style="border-style:dashed;">
+                                    <input type="text" class="form-control border-0" id="kode_promo" name="kode_promo" placeholder="Ketik kode promo jika ada">
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-3 col-xl-2 text-end">
+                                <span class="btn btn-primary w-100 text-truncate btn-promogame">Gunakan</span>
+                            </div>
+                        </div>
+                        <input type="hidden" name="potongan" id="potongan" value="0">        
+                    </div>
+                </div>
+
+                <div class="card mb-4 rounded-4 shadow-sm">
+                    <div class="card-header py-3 bg-transparent border-0 d-flex align-items-center">
+                        <span class="text-bg-primary rounded-circle px-3 py-2 me-3 fs-6 fw-bold">4</span>
+                        <h3 class="fs-5 m-0">Metode Pembayaran</h3>
                     </div>
                     <div class="card-body">
                         <?php $this->form_datapembayaran(); ?>         
                     </div>
                 </div>
 
-                <div class="card my-4 border-dark shadow-sm">
-                    <div class="card-header text-bg-dark d-flex align-items-center">
-                        <span class="text-bg-light rounded-circle px-3 py-2 me-3 fs-6 fw-bold">4</span>
-                        <h5 class="m-0">Kontak</h5>
+                <div class="card mb-4 rounded-4 shadow-sm">
+                    <div class="card-header py-3 bg-transparent border-0 d-flex align-items-center">
+                        <span class="text-bg-primary rounded-circle px-3 py-2 me-3 fs-6 fw-bold">5</span>
+                        <h3 class="fs-5 m-0">Info Kontak</h3>
                     </div>
-                    <div class="card-body">                    
+                    <div class="card-body">                      
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="email" name="Email" placeholder="email@email.com">
-                            <label for="email">Email</label>
-                        </div>                        
+                            <input type="text" class="form-control" id="notelepon" name="notelepon" placeholder="08000000">
+                            <label for="notelepon">Nomor Whatsapp</label>
+                        </div>                  
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="nowhatsapp" name="No_Whatsapp" placeholder="08000000">
-                            <label for="nowhatsapp">Nomor Whatsapp</label>
-                        </div>     
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="email@email.com">
+                            <label for="email">Email</label>
+                            <div id="emailHelp" class="form-text">Opsional, Jika anda ingin mendapatkan bukti transaksi.</div>
+                        </div>       
                     </div>
                 </div>
                 
