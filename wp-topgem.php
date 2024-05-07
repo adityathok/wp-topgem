@@ -34,6 +34,7 @@ $includes = [
 	'inc/OptionGame.php',
 	'inc/DataGame.php',
 	'inc/OrderGame.php',
+	'inc/shortcodes.php',
 ];
 
 foreach ($includes as $include) {

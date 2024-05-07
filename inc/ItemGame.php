@@ -175,6 +175,22 @@ class ItemGame {
             ),
         ) ); 
 
+        $cmb->add_field( array(
+            'name'    => 'Gambar Banner',
+            'desc'    => 'Upload gambar untuk Banner',
+            'default' => '',
+            'id'      => 'img_banner',
+            'type'    => 'file',
+            'query_args' => array(
+                'type' => array(
+                  'image/gif',
+                  'image/jpeg',
+                  'image/png',
+                  'image/webp',
+                ),
+            ),
+        ) ); 
+
     }
 
 }
