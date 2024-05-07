@@ -203,22 +203,29 @@ class OrderGame extends ItemGame {
         
         if($data_pem) {
             ?>
-            <div class="accordion" id="accordionbayar">
+            <div class="row g-2">
                 <?php foreach( $data_pem as $n => $data): ?>
-                    <div class="accordion-item border rounded mb-2 overflow-hidden">
-                        <h2 class="accordion-header">                          
-                            <input type="radio" class="w-100 p-3 btn-check" name="Pembayaran" id="pembayaran-<?php echo $n;?>" value="<?php echo $data['nama'].'|'.$data['deskripsi'];?>" autocomplete="off" required>                        
-                            <label class="accordion-button btn collapsed text-start overflow-hidden" for="pembayaran-<?php echo $n;?>"  data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $n;?>">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-fill me-2" viewBox="0 0 16 16"> <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1"/> </svg>
-                                <?php echo $data['nama'];?>
-                            </label>
-                        </h2>
-                        
-                        <div id="collapse<?php echo $n;?>" class="accordion-collapse collapse" data-bs-parent="#accordionbayar">
-                            <div class="accordion-body">
-                                <?php echo $data['deskripsi'];?>
+                    <?php
+                        $nama   = $data['nama'];
+                        $biaya  = $data['biaya']?$data['biaya']:0;
+                        $logo   = $data['logo'];
+                    ?>
+                    <div class="col-12 wptopgem-btn-bayar">
+                        <input type="radio" class="btn-check" name="metodebayar" id="metodebayar-<?php echo $n;?>" value="<?php echo $nama.'|'.$biaya;?>" autocomplete="off" required>
+                        <label class="btn btn-outline-primary p-3 d-flex justify-content-between align-items-center" for="metodebayar-<?php echo $n;?>">
+
+                            <div>
+                                <?php if($logo): ?>
+                                    <img src="<?php echo $logo;?>" class="img-fluid bg-white" loading="lazy" width="100"/>                                
+                                <?php else: ?>              
+                                    <div class="fw-bold"><?php echo $nama;?></div>                
+                                <?php endif; ?> 
+                            </div>                           
+                            <div>
+                                <small class="fst-italic"><?php echo wptopgem_rupiah($biaya);?></small>
                             </div>
-                        </div>
+
+                        </label>
                     </div>
                 <?php endforeach; ?>
             </div>

@@ -59,10 +59,30 @@ class OptionGame extends ItemGame {
             'type' => 'text',
         ) );        
         $pembayaran_options->add_group_field( $pemb_field, array(
+            'name' => 'Biaya',
+            'id'   => 'biaya',
+            'type' => 'text',
+            'default' => '0',
+            'desc' => 'Biaya admin, Hanya angka tanpa titik koma dan Rp.',
+        ) );      
+        $pembayaran_options->add_group_field( $pemb_field, array(
             'name' => 'Deskripsi',
             'id'   => 'deskripsi',
             'type' => 'textarea',
-        ) );   
+        ) );         
+        $pembayaran_options->add_group_field( $pemb_field, array(
+            'name' => 'Logo',
+            'id'   => 'logo',
+            'type'    => 'file',
+            'query_args' => array(
+                'type' => array(
+                  'image/gif',
+                  'image/jpeg',
+                  'image/png',
+                  'image/webp',
+                ),
+            ),
+        ) );    
 
     }
 
