@@ -143,11 +143,25 @@ class ItemGame {
             'name' => 'Harga',
             'id'   => 'harga',
             'type' => 'text',
+            'desc' => 'Hanya angka tanpa titik koma dan Rp.',
+        ) );
+        $cmb->add_group_field( $nominal_field, array(
+            'name' => 'Icon',
+            'id'   => 'icon',
+            'type' => 'file',
+            'query_args' => array(
+                'type' => array(
+                  'image/gif',
+                  'image/jpeg',
+                  'image/png',
+                  'image/webp',
+                ),
+            ),
         ) );
         
         $cmb->add_field( array(
             'name'    => 'Icon Nominal',
-            'desc'    => 'Upload gambar Icon Nominal',
+            'desc'    => 'Upload gambar Icon Default Nominal',
             'default' => '',
             'id'      => 'icon_nominal',
             'type'    => 'file',
@@ -156,6 +170,7 @@ class ItemGame {
                   'image/gif',
                   'image/jpeg',
                   'image/png',
+                  'image/webp',
                 ),
             ),
         ) ); 

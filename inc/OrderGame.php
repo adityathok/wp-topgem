@@ -97,22 +97,26 @@ class OrderGame extends ItemGame {
         ?>
             <div class="row">
                 <?php foreach($data_nominal as $n => $data): ?>
-                    <?php $title = $data['title'];?>
-                    <?php $price = $data['harga'];?>
-                    <div class="col-md-6 pb-3">                    
-                        <input type="radio" class="btn-check" name="Nominal" id="nominal-<?php echo $n;?>" value="<?php echo $title;?>" autocomplete="off" required>
-                        <label class="btn btn-outline-secondary d-block text-start" for="nominal-<?php echo $n;?>">
-                            <div class="d-flex align-items-center justify-content-between">
+                    <?php
+                    $title = $data['title'];
+                    $price = $data['harga'];
+                    $icon  = $data['icon'];
+                    $icon  = $icon?$icon:$icon_nominal;
+                    ?>
+                    <div class="col-6 col-md-4 col-xl-3 pb-3 wptopgem-btn-nominal">
+                        <input type="radio" class="btn-check" name="nominal" id="nominal-<?php echo $n;?>" value="<?php echo $title.'|'.$price;?>" autocomplete="off" required>
+                        <label class="btn btn-outline-dark rounded-4 d-block text-center" for="nominal-<?php echo $n;?>">
+                                                
+                            <?php if($icon): ?>
                                 <div>
-                                    <div class="fw-bold" style="font-size: 15px;"><?php echo $title;?></div>
-                                    <small class="fst-italic"><?php echo $price;?></small>
-                                </div>
-                                <?php if($icon_nominal): ?>
-                                    <div>
-                                        <img src="<?php echo $icon_nominal;?>" class="img-fluid" loading="lazy" width="60"/>
-                                    </div>                                    
-                                <?php endif; ?>
+                                    <img src="<?php echo $icon;?>" class="img-fluid" loading="lazy" width="45"/>
+                                </div>                                    
+                            <?php endif; ?>                        
+                            <div>
+                                <div class="fw-bold" style="font-size: 15px;"><?php echo $title;?></div>
+                                <small class="fst-italic"><?php echo wptopgem_rupiah($price);?></small>
                             </div>
+
                         </label>                    
                     </div>
                 <?php endforeach; ?>

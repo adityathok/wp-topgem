@@ -101,3 +101,10 @@ function ajax_formordergame(){
     
     wp_die();
 }
+
+function wptopgem_rupiah($angka){
+    $angka = $angka?$angka:0;
+    $angka = (int)$angka;
+    $hasil_rupiah = "Rp " . number_format($angka,0,',','.');
+	return $hasil_rupiah;
+}
