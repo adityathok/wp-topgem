@@ -58,6 +58,20 @@ function wp_topgem_template($template) {
         }
     }
     
+    if ( is_post_type_archive('itemgame') || is_tax('kategori-itemgame') || is_tax('developer-itemgame') ) {
+        $archive_game = WPTOPGEM_PLUGIN_DIR . 'templates/archive-itemgame.php'; 
+        
+        // Periksa keberadaan file template dalam tema yang aktif
+        $theme_archive = locate_template('archive-itemgame.php');
+        if (!empty($theme_archive)) {
+            // Gunakan template dari tema yang aktif jika ada
+            return $theme_archive;
+        } elseif (file_exists($archive_game)) {
+            // Gunakan template dari plugin jika tidak ada template dalam tema
+            return $archive_game;
+        }
+    }
+    
     return $template;
 }
 add_filter('template_include', 'wp_topgem_template');
