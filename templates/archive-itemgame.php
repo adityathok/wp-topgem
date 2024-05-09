@@ -33,11 +33,19 @@ do_action('karyawp_container_before');
                     ?>
                     <div class="col-6 col-md-4 col-xl-3">
                         <div class="card rounded-3 overflow-hidden">
-                            <div class="ratio ratio-1x1 bg-dark" style="--bs-aspect-ratio: 120%;">
-                                <?php echo get_the_post_thumbnail( get_the_ID(), 'medium', array( 'class' => 'object-fit-cover' ) ); ?>
-                            </div>
+                            <a href="<?php echo get_permalink(); ?>">
+                                <div class="ratio ratio-1x1 bg-dark" style="--bs-aspect-ratio: 120%;">
+                                    <?php echo get_the_post_thumbnail( get_the_ID(), 'medium', array( 'class' => 'object-fit-cover' ) ); ?>
+                                </div>
+                            </a>
                             <div class="card-body text-center">
-                                <?php the_title( '<h2 class="fs-6 fw-bold">', '</h2>' ); ?>
+                                <?php
+                                the_title(
+                                    sprintf( '<h2 class="fs-6 fw-bold"><a href="%s" rel="bookmark">', esc_attr( esc_url( get_permalink() ) ) ),
+                                    '</a></h2>'
+                                );
+                                ?>
+                                <?php echo do_shortcode( '[wptopgem data="developer"]' ); ?>
                             </div>
                         </div>
                     </div>

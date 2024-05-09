@@ -121,21 +121,22 @@ class OrderGame extends ItemGame {
                     <?php
                     $title = $data['title'];
                     $price = $data['harga'];
-                    $icon  = $data['icon'];
-                    $icon  = $icon?$icon:$icon_nominal;
+                    $icon  = isset($data['icon'])&&$data['icon']?$data['icon']:$icon_nominal;
                     ?>
                     <div class="col-6 col-md-4 col-xl-3 pb-3 wptopgem-btn-nominal">
                         <input type="radio" class="btn-check" name="nominal" id="nominal-<?php echo $n;?>" value="<?php echo $title.'|'.$price;?>" autocomplete="off" required>
-                        <label class="btn btn-outline-dark rounded-4 d-block text-center" for="nominal-<?php echo $n;?>">
-                                                
-                            <?php if($icon): ?>
+                        <label class="btn btn-outline-dark rounded-4 h-100 d-flex justify-content-center align-items-center" for="nominal-<?php echo $n;?>">
+                                                   
+                            <div>                
+                                <?php if($icon): ?>
+                                    <div>
+                                        <img src="<?php echo $icon;?>" class="img-fluid" loading="lazy" width="45"/>
+                                    </div>                                    
+                                <?php endif; ?>                        
                                 <div>
-                                    <img src="<?php echo $icon;?>" class="img-fluid" loading="lazy" width="45"/>
-                                </div>                                    
-                            <?php endif; ?>                        
-                            <div>
-                                <div class="fw-bold" style="font-size: 15px;"><?php echo $title;?></div>
-                                <small class="fst-italic"><?php echo wptopgem_rupiah($price);?></small>
+                                    <div class="fw-bold" style="font-size: 15px;"><?php echo $title;?></div>
+                                    <small class="fst-italic"><?php echo wptopgem_rupiah($price);?></small>
+                                </div>
                             </div>
 
                         </label>                    

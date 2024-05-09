@@ -61,6 +61,8 @@ class ItemGame {
             'show_ui'               => true,
             'show_admin_column'     => true,
             'query_var'             => true,
+            'show_in_menu'          => true,
+            'public'                => true,
             'rewrite'               => array('slug' => $this->tax_kategori),
         );
         register_taxonomy($this->tax_kategori, $this->post_type, $args);
@@ -74,6 +76,7 @@ class ItemGame {
             'show_ui'               => true,
             'show_admin_column'     => true,
             'query_var'             => true,
+            'show_in_menu'          => true,
             'rewrite'               => array('slug' => $this->tax_developer),
         );
         register_taxonomy($this->tax_developer, $this->post_type, $args);
