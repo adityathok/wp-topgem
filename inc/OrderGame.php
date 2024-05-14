@@ -39,7 +39,7 @@ class OrderGame extends ItemGame {
                     </div>
                 </div>
 
-                <div class="card mb-4 rounded-4 shadow-sm">
+                <div class="card card-promo mb-4 rounded-4 shadow-sm">
                     <div class="card-header py-3 bg-transparent border-0 d-flex align-items-center">
                         <span class="text-bg-primary rounded-circle px-3 py-2 me-3 fs-6 fw-bold">3</span>
                         <h3 class="fs-5 m-0">Kode Promo</h3>

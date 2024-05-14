@@ -34,6 +34,7 @@ $includes = [
 	'inc/OptionGame.php',
 	'inc/DataGame.php',
 	'inc/OrderGame.php',
+	'inc/PromoGame.php',
 	'inc/shortcodes.php',
 ];
 
@@ -90,7 +91,7 @@ add_action('admin_enqueue_scripts', 'wp_topgem_admin_enqueue', 25);
 
 // enquqeue frontend
 function wp_topgem_enqueue_scripts() {
-    wp_enqueue_script( 'wptopgem', WPTOPGEM_PLUGIN_URL.'/assets/script.js', array('jquery'), WPTOPGEM_VERSION, true );
+    wp_enqueue_script( 'wptopgem', WPTOPGEM_PLUGIN_URL.'/assets/script.js', array('jquery'), WPTOPGEM_VERSION.time(), true );
     wp_localize_script('wptopgem', 'wptopgem', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('ajax-nonce')
