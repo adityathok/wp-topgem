@@ -3,6 +3,7 @@ jQuery(function($){
         $('#formOrderGame').submit(function(event) { 
             // Menghentikan pengiriman form bawaan browser
             event.preventDefault();
+            $('#responOrderModal').modal('show'); 
 
             $form = $(this);
             $form.find('.form-alert-msg').remove();
@@ -18,9 +19,9 @@ jQuery(function($){
                 type: 'POST',
                 url: wptopgem.ajaxurl,
                 data: {
-                    action: 'formordergame',
+                    action: 'topupgame',
                     nonce: wptopgem.nonce,
-                    form: formData,
+                    formdata: formData,
                 },
                 success: function(response) {
                     // Menangani respons dari server jika sukses

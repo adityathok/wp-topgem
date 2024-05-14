@@ -1,6 +1,6 @@
 <?php
 $DataGame = new WPTopGem\DataGame(get_the_ID());
-$OrderGame = new WPTopGem\OrderGame(get_the_ID());
+$FormOrderGame = new WPTopGem\FormOrderGame(get_the_ID());
 ?>
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
@@ -27,7 +27,7 @@ $OrderGame = new WPTopGem\OrderGame(get_the_ID());
             </div>
         </div>
         <div class="col-md-8">
-            <?php echo $OrderGame->form(); ?>
+            <?php echo $FormOrderGame->form(); ?>
         </div>
     </div>
 

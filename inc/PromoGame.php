@@ -5,9 +5,7 @@ use \WP_Query;
 
 class PromoGame {
 
-    public $post_type       = 'promogame';
-    public $tax_kategori    = 'kategori-itemgame';
-    public $tax_developer   = 'developer-itemgame';
+    public $post_type = 'promogame';
 
     public function initialize() {
         add_action('init', array($this, 'register_post_type'));
@@ -20,7 +18,7 @@ class PromoGame {
        $args = array(
         'labels' => array(
             'name'              => 'Kode Promo Game',
-            'singular_name'     => 'promogame',
+            'singular_name'     => $this->post_type,
             'add_new'           => __( 'Tambah Promo', 'velocity-gameol' ),
             'add_new_item'      => __( 'Tambah Promo', 'velocity-gameol' ),
         ),

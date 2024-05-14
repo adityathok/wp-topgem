@@ -7,8 +7,8 @@ add_shortcode('wptopgem-formorder', function($atts){
         'id' => $post->ID,
     ), $atts );
     $post_id    = $atribut['id'];
-    $OrderGame  = new WPTopGem\OrderGame($post_id);
-    echo $OrderGame->form();
+    $FormOrderGame  = new WPTopGem\FormOrderGame($post_id);
+    echo $FormOrderGame->form();
     return ob_get_clean();
 });
 
