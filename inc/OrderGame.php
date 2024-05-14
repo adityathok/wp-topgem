@@ -126,45 +126,56 @@ class OrderGame extends ItemGame {
     }
 
     public function generate_invoice() {
-        return strtoupper(bin2hex(random_bytes(5)));
+        return strtoupper(bin2hex(random_bytes(6)));
     }
     
     public function topupgame() {
         
+        parse_str($_POST['formdata'], $formData);
+
         // Check for nonce security      
-        if ( ! wp_verify_nonce( $_POST['nonce'], 'ajax-nonce' ) ) {
+        if ( ! wp_verify_nonce( $_POST['nonce'], 'ajax-nonce' ) || !wp_verify_nonce( $formData['ordergame-nonce'], 'ordergame-action' ) ) {
             return false;
         }
-
-        parse_str($_POST['formdata'], $formData);
 
         $invoice = $this->generate_invoice();
 
         print_r($formData);
 
-        // // Create post object
-        // $new_post = array(
-        //     'post_title'    => wp_strip_all_tags( $invoice ),
-        //     'post_type'     => $this->post_type,
-        //     'post_content'  => '',
-        //     'post_status'   => 'publish',
-        //     'meta_input'    => array(
-        //         'status'        => 'baru',
-        //         'invoice'       => $invoice,
-        //     ),
-        // );
+        // Create post object
+        $new_post = array(
+            'post_title'    => wp_strip_all_tags( $invoice ),
+            'post_type'     => $this->post_type,
+            'post_content'  => '',
+            'post_status'   => 'publish',
+            'meta_input'    => array(
+                'status'        => 'baru',
+                'invoice'       => $invoice,
+            ),
+        );
 
-        // foreach($formData as $key => $value):
-        //     if ( $key == 'ordergame-nonce' ) { continue; }
-        //     if ( $key == '_wp_http_referer' ) { continue; }
-        //     if ( $key == 'dataplayer' ) { continue; }
+        foreach($formData as $key => $value):
+            if ( $key == 'ordergame-nonce' ) { continue; }
+            if ( $key == '_wp_http_referer' ) { continue; }
+            if ( $key == 'dataplayer' ) { continue; }
 
-        //     if($key == 'kode_promo' && $formData['potongan'] == 0){
-        //         $value = '';
-        //     }
+            if($key == 'kode_promo' && $formData['potongan'] == 0){
+                $value = '';
+            }
 
-        //     $new_post['meta_input'][$key] = $value;
-        // endforeach;
+            $new_post['meta_input'][$key] = $value;
+        endforeach;
+
+        //dataplayer 
+        $dataplayer = [];           
+        foreach($formData['dataplayer'] as $key => $value):
+            $dataplayer[] = $key.' : '.$value;
+        endforeach;
+        $new_post['meta_input']['player']       = $dataplayer;
+        $new_post['meta_input']['data_player']  = $formData['dataplayer'];
+
+        //SAVE
+        // $new_postid = wp_insert_post( $new_post );
 
         echo '<div class="my-2">';            
             echo '<div class="alert alert-success border-2 text-center w-100 mb-4" style="border-style: dashed;">';

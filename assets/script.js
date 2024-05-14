@@ -28,6 +28,7 @@ jQuery(function($){
                     $form.removeClass('placeholder bg-transparent w-100');
                     $form.trigger("reset");
                     $modal.html(response);
+                    hapusKodePromo();
                 },
                 error: function() {
                     // Menangani respons dari server jika terjadi kesalahan
@@ -38,6 +39,14 @@ jQuery(function($){
             });
         });
     });
+
+    $(document).on('click','#formOrderGame .wptopgem-btn-bayar', function(){
+        var nominal = $('input[name="nominal"]:checked').val();
+        if(nominal){
+
+        }
+    });
+
 
     $(document).on('click','#formOrderGame .btn-promogame', function(){
         var kode    = $('#kode_promo').val();

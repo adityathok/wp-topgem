@@ -208,7 +208,7 @@ class FormOrderGame extends OrderGame
                         $biaya  = $data['biaya']?$data['biaya']:0;
                         $logo   = $data['logo'];
                     ?>
-                    <div class="col-12 wptopgem-btn-bayar">
+                    <div class="col-12 wptopgem-btn-bayar" data-value="<?php echo $biaya;?>">
                         <input type="radio" class="btn-check" name="metodebayar" id="metodebayar-<?php echo $n;?>" value="<?php echo $nama.'|'.$biaya;?>" autocomplete="off" required>
                         <label class="btn btn-outline-primary p-3 d-flex justify-content-between align-items-center" for="metodebayar-<?php echo $n;?>">
 
