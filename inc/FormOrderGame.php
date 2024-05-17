@@ -103,7 +103,7 @@ class FormOrderGame extends OrderGame
                 </div>
 
                 <input type="hidden" value="<?php echo get_the_title($this->id); ?>" name="game">
-                <input type="hidden" value="<?php echo $this->id; ?>" name="game_id">
+                <input type="hidden" value="<?php echo $this->id; ?>" name="id_game">
                 <input type="hidden" value="0" name="total_metodebayar" id="totalmetodebayar">
                 <input type="hidden" value="0" name="total_nominal" id="totalnominal">
                 <input type="hidden" value="0" name="total_bayar" id="totalbayar"> 

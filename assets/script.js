@@ -125,4 +125,21 @@ jQuery(function($){
         hapusKodePromo();
     });
 
+    $('#form-wptopgem-cekorder').submit(function(event) {
+        event.preventDefault();
+        $('.wptopgem-cekorder .result').html('<div class="spinner-border" role="status"> <span class="visually-hidden">Loading...</span> </div> Loading...');
+        var formData = $(this).serialize();
+        $.ajax({
+            url: wptopgem.ajaxurl,
+            method: 'POST',
+            data: {
+                action: 'cekordergame',
+                formdata: formData
+            },
+            success: function(response) {
+                $('.wptopgem-cekorder .result').html(response);
+            }
+        });
+    });
+
 });
