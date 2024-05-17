@@ -98,17 +98,29 @@ class OrderGame extends ItemGame {
             'id'            => 'potongan',
         ));
         $cmb->add_field( array(
-            'name'          => 'Total Bayar',
+            'name'          => 'Total Nominal',
             'desc'          => '',
             'type'          => 'text',
-            'id'            => 'total_bayar',
-            'column'        => true,
+            'id'            => 'total_nominal',
         ));
         $cmb->add_field( array(
             'name'          => 'Metode Pembayaran',
             'desc'          => '',
             'type'          => 'text',
-            'id'            => 'pembayaran',
+            'id'            => 'metodebayar',
+        ));
+        $cmb->add_field( array(
+            'name'          => 'Biaya Metode Pembayaran',
+            'desc'          => '',
+            'type'          => 'text',
+            'id'            => 'total_metodebayar',
+        ));
+        $cmb->add_field( array(
+            'name'          => 'Total Bayar',
+            'desc'          => '',
+            'type'          => 'text',
+            'id'            => 'total_bayar',
+            'column'        => true,
         ));
         $cmb->add_field( array(
             'name'          => 'No. WhatsApp',
@@ -140,7 +152,7 @@ class OrderGame extends ItemGame {
 
         $invoice = $this->generate_invoice();
 
-        print_r($formData);
+        //print_r($formData);
 
         // Create post object
         $new_post = array(
@@ -175,7 +187,7 @@ class OrderGame extends ItemGame {
         $new_post['meta_input']['data_player']  = $formData['dataplayer'];
 
         //SAVE
-        // $new_postid = wp_insert_post( $new_post );
+        $new_postid = wp_insert_post( $new_post );
 
         echo '<div class="my-2">';            
             echo '<div class="alert alert-success border-2 text-center w-100 mb-4" style="border-style: dashed;">';

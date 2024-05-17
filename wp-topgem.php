@@ -36,6 +36,7 @@ $includes = [
 	'inc/OrderGame.php',
 	'inc/PromoGame.php',
 	'inc/FormOrderGame.php',
+	'inc/CekOrderGame.php',
 	'inc/shortcodes.php',
 ];
 

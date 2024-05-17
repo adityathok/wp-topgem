@@ -71,14 +71,27 @@ class FormOrderGame extends OrderGame
                     </div>
                     <div class="card-body">                      
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="notelepon" name="notelepon" placeholder="08000000">
-                            <label for="notelepon">Nomor Whatsapp</label>
+                            <input type="text" class="form-control" id="notelepon" name="nowa" placeholder="08000000">
+                            <label for="nowa">Nomor Whatsapp</label>
                         </div>                  
                         <div class="form-floating">
                             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="email@email.com">
                             <label for="email">Email</label>
                             <div id="emailHelp" class="form-text">Opsional, Jika anda ingin mendapatkan bukti transaksi.</div>
                         </div>       
+                    </div>
+                </div>
+
+                <div class="card mb-4 rounded-4 shadow-sm">
+                    <div class="card-header py-3 bg-transparent border-0 d-flex align-items-center">
+                        <span class="text-bg-primary rounded-circle px-3 py-2 me-3 fs-6 fw-bold">6</span>
+                        <h3 class="fs-5 m-0">Rincian</h3>
+                    </div>
+                    <div class="card-body card-rincian">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>Total dibayar</div>
+                            <div class="fs-4 ps-2 fw-bold text-end totalbayar-text">Rp 0</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -89,6 +102,11 @@ class FormOrderGame extends OrderGame
                     </button>
                 </div>
 
+                <input type="hidden" value="<?php echo get_the_title($this->id); ?>" name="game">
+                <input type="hidden" value="<?php echo $this->id; ?>" name="game_id">
+                <input type="hidden" value="0" name="total_metodebayar" id="totalmetodebayar">
+                <input type="hidden" value="0" name="total_nominal" id="totalnominal">
+                <input type="hidden" value="0" name="total_bayar" id="totalbayar"> 
                 <?php wp_nonce_field( 'ordergame-action', 'ordergame-nonce' ); ?>
 
             </form>
@@ -208,7 +226,7 @@ class FormOrderGame extends OrderGame
                         $biaya  = $data['biaya']?$data['biaya']:0;
                         $logo   = $data['logo'];
                     ?>
-                    <div class="col-12 wptopgem-btn-bayar" data-value="<?php echo $biaya;?>">
+                    <div class="col-12 wptopgem-btn-bayar" data-biaya="<?php echo $biaya;?>">
                         <input type="radio" class="btn-check" name="metodebayar" id="metodebayar-<?php echo $n;?>" value="<?php echo $nama.'|'.$biaya;?>" autocomplete="off" required>
                         <label class="btn btn-outline-primary p-3 d-flex justify-content-between align-items-center" for="metodebayar-<?php echo $n;?>">
 
