@@ -1,7 +1,9 @@
 <?php
 namespace WPTopGem;
 
-class OrderGame extends ItemGame {
+use \WP_Query;
+
+class OrderGame {
 
     public $post_type = 'ordergame';
 
@@ -140,6 +142,16 @@ class OrderGame extends ItemGame {
     public function generate_invoice() {
         return strtoupper(bin2hex(random_bytes(6)));
     }
+
+    public function status() {
+        $status = array(
+            'baru'      => 'Pesanan Baru',
+            'lunas'     => 'Lunas',
+            'sukses'    => 'Sukses',
+            'gagal'     => 'Gagal',
+        );
+        return $status;
+    }
     
     public function topupgame() {
         
@@ -197,6 +209,56 @@ class OrderGame extends ItemGame {
         echo '</div>';
 
         wp_die();
+    }
+
+    function dataorder($id_order=null){
+        if(empty($id_order))
+        return false;
+
+        $status         = get_post_meta( $id_order, 'status', true );
+
+        $nominal        = get_post_meta( $id_order, 'nominal', true );
+        $setnominal     = isset($nominal)&!empty($nominal)?explode("|",$nominal):'';
+        $nilai_nominal  = $setnominal?str_replace(".", "", $setnominal[1]):0;
+        $nama_nominal   = $setnominal?$setnominal[0]:0;
+
+        $pembayaran     = get_post_meta( $id_order, 'metodebayar', true );
+        $setbayar       = isset($pembayaran)&!empty($pembayaran)?explode("|",$pembayaran):[];
+
+        $potongan       = get_post_meta( $id_order, 'potongan', true );
+        $total_bayar    = get_post_meta( $id_order, 'total_bayar', true );
+        
+        $result = [
+            'invoice'       => get_post_meta($id_order,'invoice',true),
+            'game_id'       => get_post_meta($id_order,'id_game',true),
+            'game'          => get_post_meta($id_order,'game',true),
+            'status'        => [
+                'value'     => $status,
+                'title'     => $status?$this->status()[$status]:'',
+            ],
+            'nominal'       => [
+                'value'     => $nominal,
+                'nilai'     => $nilai_nominal,
+                'title'     => $nama_nominal,
+            ],
+            'bayar'         => [
+                'value'     => $pembayaran,
+                'title'     => $setbayar?$setbayar[0]:'',
+                'biaya'     => $setbayar?$setbayar[1]:'',
+            ],
+            'potongan'      => $potongan,
+            'total_bayar'   => $total_bayar,
+        ];
+        
+        $data_player = get_post_meta( get_the_ID(), 'data_player', true );
+        if($data_player):
+            foreach ($data_player as $key => $value) {
+                $result['data_player'][$key] = $value;
+            }
+        endif;
+
+        return $result;
+
     }
 
 }

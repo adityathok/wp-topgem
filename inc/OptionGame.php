@@ -23,10 +23,36 @@ class OptionGame extends ItemGame {
             ) 
         );
         $main_options->add_field( array(
-            'name'    => esc_html__( 'No Whatsapp Pemesanan', 'cmb2' ),
-            'desc'    => esc_html__( '', 'cmb2' ),
-            'id'      => 'nowhatsapp_order',
-            'type'    => 'text',
+            'name'    => esc_html__( 'Aktifkan Email Notifikasi Admin', 'wp-topgem' ),
+            'desc'    => esc_html__( 'Aktifkan Email untuk menerima notif pembelian ke admin', 'wp-topgem' ),
+            'id'      => 'email_admin_aktif',
+            'type'    => 'checkbox',
+        ) );
+        $main_options->add_field( array(
+            'name'    => esc_html__( 'Email Admin', 'wp-topgem' ),
+            'desc'    => esc_html__( 'Email untuk menerima notif pembelian', 'wp-topgem' ),
+            'id'      => 'email_admin',
+            'type'    => 'text_email',
+        ) );
+        $main_options->add_field( array(
+            'name'    => esc_html__( 'Template Email Admin', 'wp-topgem' ),
+            'desc'    => esc_html__( '', 'wp-topgem' ),
+            'id'      => 'email_admin_template',
+            'type'    => 'wysiwyg',
+            'default' => 'Pesanan Baru dengan kode Invoice : <strong>{{invoice}}</strong> <br> Rincian Pesanan : <br> <strong>{{tabel-pesanan}}</strong> <br>',
+        ) );
+        $main_options->add_field( array(
+            'name'    => esc_html__( 'Aktifkan Email Notifikasi Pembeli', 'wp-topgem' ),
+            'desc'    => esc_html__( 'Email untuk menerima butki pembelian ke Email Pembeli', 'wp-topgem' ),
+            'id'      => 'email_pembeli_aktif',
+            'type'    => 'checkbox',
+        ) );
+        $main_options->add_field( array(
+            'name'    => esc_html__( 'Template Email Admin', 'wp-topgem' ),
+            'desc'    => esc_html__( '', 'wp-topgem' ),
+            'id'      => 'email_pembeli_template',
+            'type'    => 'wysiwyg',
+            'default' => 'Terima kasih telah membeli dengan kode Invoice : <strong>{{invoice}}</strong><br> Rincian Pesanan :<br> <strong>{{tabel-pesanan}}</strong><br> Silahkan hubungi admin jika telah membayar tagihan yang ada.'
         ) );
 
         //Pembayaran
@@ -44,11 +70,11 @@ class OptionGame extends ItemGame {
         $pemb_field = $pembayaran_options->add_field( array(
             'id'          => 'opsi_bayar',
             'type'        => 'group',
-            'description' => __( 'Opsi Metode Pembayaran untuk pembelian.', 'cmb2' ),
+            'description' => __( 'Opsi Metode Pembayaran untuk pembelian.', 'wp-topgem' ),
             'options'     => array(
-                'group_title'       => __( 'Metode Bayar {#}', 'cmb2' ),
-                'add_button'        => __( 'Tambah Metode', 'cmb2' ),
-                'remove_button'     => __( 'Hapus Metode', 'cmb2' ),
+                'group_title'       => __( 'Metode Bayar {#}', 'wp-topgem' ),
+                'add_button'        => __( 'Tambah Metode', 'wp-topgem' ),
+                'remove_button'     => __( 'Hapus Metode', 'wp-topgem' ),
                 'sortable'          => true,
                 'closed'            => true,
             ),

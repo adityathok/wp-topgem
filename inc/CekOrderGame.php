@@ -50,26 +50,18 @@ class CekOrderGame extends OrderGame {
                 while ( $the_query->have_posts() ) {
                     $the_query->the_post();
 
-                    $stt = array(
-                        'baru'      => 'Pesanan Baru',
-                        'lunas'     => 'Lunas',
-                        'sukses'    => 'Sukses',
-                        'gagal'     => 'Gagal',
-                    );
-    
-                    $status         = get_post_meta( get_the_ID(), 'status', true );
-                    $nominal        = get_post_meta( get_the_ID(), 'nominal', true );
-                    $nominal        = isset($nominal)&!empty($nominal)?explode("|",$nominal):'';
-                    $nilai_nominal  = $nominal?str_replace(".", "", $nominal[1]):0;
-                    $nama_nominal   = $nominal?$nominal[0]:0;
-                    $pembayaran     = get_post_meta( get_the_ID(), 'metodebayar', true );
-                    $potongan       = get_post_meta( get_the_ID(), 'potongan', true );
-                    $total_bayar    = get_post_meta( get_the_ID(), 'total_bayar', true );
+                    $dataorder      = $this->dataorder(get_the_ID());
+
+                    $pembayaran     = $dataorder['bayar']['value'];
+                    $nilai_nominal  = $dataorder['nominal']['nilai']??0;
+                    $nama_nominal   = $dataorder['nominal']['title']??'-';
+                    $potongan       = $dataorder['potongan']??0;
+                    $total_bayar    = $dataorder['total_bayar']??0;
     
                     echo '<div class="card text-center shadow my-3 text-dark border-2">';
                         echo '<div class="card-header text-bg-dark d-flex align-items-center justify-content-between">';
-                            echo '<div class="fw-bold fs-5">'.$invoice.'</div>';
-                            echo '<span class="badge bg-primary">'.$stt[$status].'</span>';
+                            echo '<div class="fw-bold fs-5">'.$dataorder['invoice'].'</div>';
+                            echo '<span class="badge bg-primary">'.$dataorder['status']['title'].'</span>';
                         echo '</div>';
                         echo '<div class="card-body text-start">';
                             echo '<div class="table-responsive">';
@@ -77,21 +69,20 @@ class CekOrderGame extends OrderGame {
                                     echo '<tbody>';
                                         echo '<tr>';
                                             echo '<td class="fw-bold">Game</td>';
-                                            echo '<td>'.get_post_meta(get_the_ID(),'game',true).'</td>';
+                                            echo '<td>'.$dataorder['game'].'</td>';
                                         echo '</tr>';
                                         echo '<tr>';
                                             echo '<td class="fw-bold">Nominal</td>';
                                             echo '<td>';
-                                                echo $nama_nominal;
+                                                echo $dataorder['nominal']['title'];
                                             echo '</td>';
                                         echo '</tr>';
                                         echo '<tr>';
                                             echo '<td class="fw-bold">Data Player</td>';
                                             echo '<td>';
-                                                $data_player = get_post_meta( get_the_ID(), 'data_player', true );
-                                                if($data_player):
+                                                if($dataorder['data_player']):
                                                     echo '<ul class="ps-3">';
-                                                    foreach ($data_player as $key => $value) {
+                                                    foreach ($dataorder['data_player'] as $key => $value) {
                                                         echo '<li>';
                                                             echo $key.' : '.$value;
                                                         echo '</li>';
