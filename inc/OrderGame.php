@@ -201,12 +201,19 @@ class OrderGame {
         //SAVE
         $new_postid = wp_insert_post( $new_post );
 
-        echo '<div class="my-2">';            
+        echo '<div class="my-2">';  
+        if( !is_wp_error($new_postid) ) {    
             echo '<div class="alert alert-success border-2 text-center w-100 mb-4" style="border-style: dashed;">';
                 echo 'KODE INVOICE : <br>';
                 echo '<div class="fs-2 fw-bold">'.$invoice.'</div>';
             echo '</div>';
-        echo '</div>';
+            $this->email($new_postid);
+        } else {    
+            echo '<div class="alert alert-success border-2 text-center w-100 mb-4" style="border-style: dashed;">';
+                echo $new_postid->get_error_message();
+            echo '</div>';
+        }  
+        echo '</div>';    
 
         wp_die();
     }
@@ -259,6 +266,37 @@ class OrderGame {
 
         return $result;
 
+    }
+    
+    function email($id_order){
+        $dataopt = get_option( 'itemgame_option' );
+        $admin_email = $dataopt['email_admin']??get_bloginfo('admin_email');
+        $admin_templ = $dataopt['email_admin_template']??'Pesanan Baru dengan kode Invoice : <strong>{{invoice}}</strong> <br> Rincian Pesanan : <br> <strong>{{tabel-pesanan}}</strong> <br>';
+
+        $order = $this->dataorder($id_order);
+
+        ob_start();
+        ?>
+        <div style="background-color:#f4f4f4;padding: 1rem;">
+            <div style="background-color:#ffffff;padding: 1rem;max-width:300px;margin:0 auto;">
+            <?php echo $admin_templ; ?>
+            </div>
+        </div>
+        <?php
+        $message = ob_get_clean();
+
+        //kirim email ke admin
+        $admin_subject = 'Pesanan Baru untuk '.$order['game'];
+        $admin_send = $this->send_html_email($admin_email, $admin_subject, $message);
+    }
+
+    function send_html_email($to, $subject, $message) {
+        // $headers .= "From: Your Name <your_email@example.com>\r\n";
+        // $headers .= "Reply-To: your_email@example.com\r\n";
+        $headers = "X-Mailer: PHP/" . phpversion() . "\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";    
+        wp_mail($to, $subject, $message, $headers);
     }
 
 }
