@@ -57,6 +57,8 @@ class CekOrderGame extends OrderGame {
                     $nama_nominal   = $dataorder['nominal']['title']??'-';
                     $potongan       = $dataorder['potongan']??0;
                     $total_bayar    = $dataorder['total_bayar']??0;
+
+                    echo $this->tabel_order(get_the_ID());
     
                     echo '<div class="card text-center shadow my-3 text-dark border-2">';
                         echo '<div class="card-header text-bg-dark d-flex align-items-center justify-content-between">';

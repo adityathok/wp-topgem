@@ -203,13 +203,13 @@ class OrderGame {
 
         echo '<div class="my-2">';  
         if( !is_wp_error($new_postid) ) {    
-            echo '<div class="alert alert-success border-2 text-center w-100 mb-4" style="border-style: dashed;">';
+            echo '<div class="alert alert-success border-2 text-center w-100 m-0" style="border-style: dashed;">';
                 echo 'KODE INVOICE : <br>';
                 echo '<div class="fs-2 fw-bold">'.$invoice.'</div>';
             echo '</div>';
             $this->email($new_postid);
         } else {    
-            echo '<div class="alert alert-success border-2 text-center w-100 mb-4" style="border-style: dashed;">';
+            echo '<div class="alert alert-warning border-2 text-center w-100 m-0">';
                 echo $new_postid->get_error_message();
             echo '</div>';
         }  
@@ -255,6 +255,7 @@ class OrderGame {
             ],
             'potongan'      => $potongan,
             'total_bayar'   => $total_bayar,
+            'email'         => get_post_meta($id_order,'email',true),
         ];
         
         $data_player = get_post_meta( get_the_ID(), 'data_player', true );
@@ -268,32 +269,103 @@ class OrderGame {
 
     }
     
-    function email($id_order){
-        $dataopt = get_option( 'itemgame_option' );
-        $admin_email = $dataopt['email_admin']??get_bloginfo('admin_email');
-        $admin_templ = $dataopt['email_admin_template']??'Pesanan Baru dengan kode Invoice : <strong>{{invoice}}</strong> <br> Rincian Pesanan : <br> <strong>{{tabel-pesanan}}</strong> <br>';
-
+    function tabel_order($id_order){
         $order = $this->dataorder($id_order);
+        $datas = [
+            [
+                'title' => 'Invoice',
+                'value' => $order['invoice'],
+            ],
+            [
+                'title' => 'Nominal',
+                'value' => $order['nominal']['title'],
+            ],
+            [
+                'title' => 'Nominal Harga',
+                'value' => $order['nominal']['nilai'],
+            ],
+            [
+                'title' => 'Pembayaran',
+                'value' => $order['bayar']['title'],
+            ],
+            [
+                'title' => 'Potongan',
+                'value' => $order['potongan'],
+            ],
+            [
+                'title' => 'Total Bayar',
+                'value' => 'Rp '.number_format($order['total_bayar'],0,',','.'),
+            ],
+        ];
+
+        ob_start(); 
+        ?>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;border-bottom:1px solid #e4eaf3">
+        <tbody>
+            <?php foreach( $datas as $i => $data): ?>
+                <tr>
+                    <td><?php echo $data['title']; ?></td>
+                    <td style="text-align:right;">
+                        <?php echo $data['value']; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+        </table>
+        <?php
+        return ob_get_clean();
+    }
+
+    function email($id_order){
+        $OptionGame     = new OptionGame();
+        $nama_toko      = $OptionGame->get('nama_toko')??get_bloginfo('name');
+        $admin_email    = $OptionGame->get('email_admin')??get_bloginfo('admin_email');
+        $admin_templ    = $OptionGame->get('email_admin_template')??'Pesanan Baru dengan kode Invoice : <strong>{{invoice}}</strong> <br> Rincian Pesanan : <br> <strong>{{tabel-pesanan}}</strong> <br>';
+        $order          = $this->dataorder($id_order);
+        $tabel_order    = $this->tabel_order($id_order);
 
         ob_start();
         ?>
         <div style="background-color:#f4f4f4;padding: 1rem;">
-            <div style="background-color:#ffffff;padding: 1rem;max-width:300px;margin:0 auto;">
-            <?php echo $admin_templ; ?>
+            <div style="background-color:#ffffff;max-width:650px;margin:0 auto;">
+                <div style="background-color:#212121;padding: 1rem;color:#ffffff;font-size:1.5rem;">
+                    <?php echo $nama_toko; ?>
+                </div>
+                <div style="padding: 1rem;">{{template_email}}</div>
             </div>
         </div>
         <?php
-        $message = ob_get_clean();
+        $template = ob_get_clean();
 
+        //replace template
+        $message_admin  = $template;
+        $message_admin  = str_replace("{{template_email}}",$admin_templ,$message_admin);
+        $message_admin  = str_replace("{{invoice}}",$order['invoice'],$message_admin);
+        $message_admin  = str_replace("{{tabel-pesanan}}",$tabel_order,$message_admin);
         //kirim email ke admin
-        $admin_subject = 'Pesanan Baru untuk '.$order['game'];
-        $admin_send = $this->send_html_email($admin_email, $admin_subject, $message);
+        $admin_subject  = 'Pesanan Baru untuk '.$order['game'];
+        $admin_send     = $this->send_html_email($admin_email, $admin_subject, $message_admin);
+
+        //kirim email ke pembeli
+        if($order['email']){
+            $buyer_templ    = $OptionGame->get('email_pembeli_template')??'Terima kasih telah membeli dengan kode Invoice : <strong>{{invoice}}</strong><br> Rincian Pesanan :<br> <strong>{{tabel-pesanan}}</strong><br> Silahkan hubungi admin jika telah membayar tagihan yang ada.';
+            //replace template
+            $message_buyer  = $template;
+            $message_buyer  = str_replace("{{template_email}}",$buyer_templ,$message_buyer);
+            $message_buyer  = str_replace("{{invoice}}",$order['invoice'],$message_buyer);
+            $message_buyer  = str_replace("{{tabel-pesanan}}",$tabel_order,$message_buyer);
+
+            $buyer_subject  = 'Rincian Pesanan Anda untuk '.$order['game'];
+            $buyer_send     = $this->send_html_email($order['email'], $buyer_subject, $message_buyer);
+        }
     }
 
     function send_html_email($to, $subject, $message) {
-        // $headers .= "From: Your Name <your_email@example.com>\r\n";
+        $sitehost  = preg_replace('#^https?://#', '', get_site_url());
+        $site_title = get_bloginfo( 'name' );
+        $headers = "From: ".$site_title." <admin@".$sitehost.">\r\n";
         // $headers .= "Reply-To: your_email@example.com\r\n";
-        $headers = "X-Mailer: PHP/" . phpversion() . "\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8\r\n";    
         wp_mail($to, $subject, $message, $headers);

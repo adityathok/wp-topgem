@@ -213,9 +213,10 @@ class FormOrderGame extends OrderGame
         }
     }
 
-    public function form_datapembayaran() {
-        $data_pem = get_option( 'itemgame_option_pembayaran' );
-        $data_pem = isset($data_pem['opsi_bayar'])?$data_pem['opsi_bayar']:array();
+    public function form_datapembayaran() {        
+        $OptionGame = new OptionGame();
+        $data_pem   = $OptionGame->get('opsi_bayar');
+        $data_pem   = $data_pem??array();
         
         if($data_pem) {
             ?>
